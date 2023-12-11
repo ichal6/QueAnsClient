@@ -1,0 +1,10 @@
+<p>entry works</p>
+@defer (when hasLoaded){
+  @for (entry of entries; track entry.id) {
+    <p>{{ entry.id }}</p>
+  }
+} @placeholder {
+  <p>Waiting for data</p>
+} @error {
+  <p class="error">Problem with access data: {{ message }}</p>
+}
