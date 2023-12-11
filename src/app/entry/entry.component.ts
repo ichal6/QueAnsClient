@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EntryService} from "./service/entry.service";
 import {Subscription} from "rxjs";
-import {Entry} from "./model/entry/entry";
+import {Entry} from "./model/entry";
 
 @Component({
   selector: 'app-entry',

@@ -1,0 +1,8 @@
+<p>random works!</p>
+@defer (when hasLoaded){
+    <p>{{ question?.question }}</p>
+} @placeholder {
+  <p>Waiting for data</p>
+} @error {
+  <p class="error">Problem with access data: {{ message }}</p>
+}

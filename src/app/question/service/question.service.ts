@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {Entry, EntryJS} from "../model/entry";
 import {environment} from "../../../environments/environment";
+import {Question} from "../model/Question";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntryService {
+export class QuestionService {
 
   constructor(private http: HttpClient) { }
 
-  getEntries(): Observable<Array<Entry>> {
-    return this.http.get<Array<EntryJS>>(environment.restUrl + '/api/entry')
+  getRandomQuestion(): Observable<Question> {
+    return this.http.get<Question>(environment.restUrl + '/api/question/random')
       .pipe(
         map(
-          entriesJS => entriesJS.map(entryJS => Entry.fromHttp(entryJS))
+          questionJS => Question.fromHttp(questionJS)
         )
       );
   }
