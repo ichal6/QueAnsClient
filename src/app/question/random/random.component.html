@@ -6,3 +6,18 @@
 } @error {
   <p class="error">Problem with access data: {{ message }}</p>
 }
+
+@if(hasLoaded) {
+  <button (click)="requestAnswers()">
+    Load answer
+  </button>
+
+  @defer (when answers){
+    <p>{{ getAnswer() }}<p></p>
+  } @placeholder {
+    <p>Please click the button</p>
+  } @error {
+    <p class="error">Problem with access data: {{ message }}</p>
+  }
+}
+
