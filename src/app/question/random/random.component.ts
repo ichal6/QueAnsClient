@@ -4,21 +4,25 @@ import {Question} from "../model/question";
 import {QuestionService} from "../service/question.service";
 import {Answer} from "../../answer/model/answer";
 import {AnswerService} from "../../answer/service/answer.service";
+import {AnswerComponent} from "../../answer/answer.component";
 
 @Component({
   selector: 'app-random',
   standalone: true,
-  imports: [],
+  imports: [
+    AnswerComponent
+  ],
   templateUrl: './random.component.html',
   styleUrl: './random.component.css'
 })
 export class RandomComponent implements OnInit, OnDestroy {
   private _subscribeQuestion: Subscription;
   private _subscribeAnswers: Subscription;
-  question?: Question;
-  answers?: Array<Answer>;
+  question!: Question;
+  answers: Array<Answer>;
   message: string;
-  hasLoaded: boolean;
+  hasLoadedQuestion: boolean;
+  loadAnswersComponent: boolean;
 
   constructor(
     private questionService: QuestionService,
@@ -27,7 +31,9 @@ export class RandomComponent implements OnInit, OnDestroy {
     this._subscribeQuestion = Subscription.EMPTY;
     this._subscribeAnswers = Subscription.EMPTY;
     this.message = "";
-    this.hasLoaded = false;
+    this.hasLoadedQuestion = false;
+    this.loadAnswersComponent = false;
+    this.answers = [];
   }
 
   ngOnInit(): void {
@@ -43,7 +49,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     this._subscribeQuestion = this.questionService.getRandomQuestion().subscribe({
       next: (res) => {
         this.question = res;
-        this.hasLoaded = true;
+        this.hasLoadedQuestion = true;
       },
       error: err => {
         console.error('problem with loading the questions: ', err);
@@ -53,12 +59,8 @@ export class RandomComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAnswer(): string {
-    if(this.answers) {
-      const randIndex = Math.floor(Math.random() * this.answers.length);
-      return this.answers[randIndex].answer;
-    }
-    return 'no answers';
+  loadAnswers(): void {
+    this.requestAnswers();
   }
 
   requestAnswers(): void {
@@ -67,6 +69,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     this._subscribeAnswers = this.answerService.getAnswersForEntry(this.question.entryId).subscribe({
       next: (res) => {
         this.answers = res;
+        this.loadAnswersComponent = true;
       },
       error: err => {
         console.error('problem with loading the answers: ', err);
@@ -76,5 +79,11 @@ export class RandomComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected readonly Math = Math;
+  getAnswer(): Answer | undefined {
+    if(this.answers.length != 0) {
+      const randIndex = Math.floor(Math.random() * this.answers.length);
+      return this.answers[randIndex];
+    }
+    return undefined;
+  }
 }
