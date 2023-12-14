@@ -10,7 +10,7 @@
   <button (click)="loadAnswers()">
     Load answer
   </button>
-  @if (loadAnswersComponent) {
+  @if (loadAnswersArray) {
     <app-answer [answer]="getAnswer()" />
   }
 }

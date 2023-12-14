@@ -22,7 +22,7 @@ export class RandomComponent implements OnInit, OnDestroy {
   answers: Array<Answer>;
   message: string;
   hasLoadedQuestion: boolean;
-  loadAnswersComponent: boolean;
+  loadAnswersArray: boolean;
 
   constructor(
     private questionService: QuestionService,
@@ -32,7 +32,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     this._subscribeAnswers = Subscription.EMPTY;
     this.message = "";
     this.hasLoadedQuestion = false;
-    this.loadAnswersComponent = false;
+    this.loadAnswersArray = false;
     this.answers = [];
   }
 
@@ -60,7 +60,8 @@ export class RandomComponent implements OnInit, OnDestroy {
   }
 
   loadAnswers(): void {
-    this.requestAnswers();
+    if(!this.loadAnswersArray)
+      this.requestAnswers();
   }
 
   requestAnswers(): void {
@@ -69,7 +70,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     this._subscribeAnswers = this.answerService.getAnswersForEntry(this.question.entryId).subscribe({
       next: (res) => {
         this.answers = res;
-        this.loadAnswersComponent = true;
+        this.loadAnswersArray = true;
       },
       error: err => {
         console.error('problem with loading the answers: ', err);
