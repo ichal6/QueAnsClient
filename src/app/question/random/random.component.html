@@ -1,8 +1,17 @@
-<p>random works!</p>
-@defer (when hasLoaded){
+@defer (when hasLoadedQuestion){
     <p>{{ question?.question }}</p>
 } @placeholder {
   <p>Waiting for data</p>
 } @error {
   <p class="error">Problem with access data: {{ message }}</p>
 }
+
+@if(hasLoadedQuestion) {
+  <button (click)="loadAnswers()">
+    Load answer
+  </button>
+  @if (loadAnswersArray) {
+    <app-answer [answer]="getAnswer()" />
+  }
+}
+
