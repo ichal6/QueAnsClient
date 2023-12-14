@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import {EntryComponent} from "./entry/entry.component";
-import {RandomComponent} from "./question/random/random.component";
+import { EntryComponent } from "./entry/entry.component";
+import { RandomComponent } from "./question/random/random.component";
 
 @Component({
   selector: 'app-root',
