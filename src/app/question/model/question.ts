@@ -1,3 +1,5 @@
+import {environment} from "../../../environments/environment";
+
 export class Question {
   constructor(private _id: string,
               private _question: string,
@@ -5,7 +7,7 @@ export class Question {
   }
 
   static fromHttp(questionJS: QuestionJS) {
-    const baseURL: string = "http://localhost:8080/api/entry/";
+    const baseURL: string = environment.restUrl + "/api/entry/";
     const cleanedURL: string = questionJS._links.entry.href.replace(new RegExp('^' + baseURL), '');
 
     return new Question(questionJS.id, questionJS.question, cleanedURL);
