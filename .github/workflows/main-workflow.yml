@@ -61,11 +61,11 @@ jobs:
           npm run test:ci
 
       - name: Create 404.html
-        #if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: cp dist/QueAnsClient/browser/index.html dist/QueAnsClient/browser/404.html
 
       - name: Deploy to GitHub Pages
-        #if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
