@@ -38,7 +38,7 @@ export class EntryComponent implements OnInit, OnDestroy{
         this.hasLoaded = true;
       },
       error: err => {
-        console.error('problem with loading the entries: ', err);
+        console.error(err);
         this.message = err.message;
         },
       complete: () => console.log('Completed fetch entries')

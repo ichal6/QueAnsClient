@@ -52,7 +52,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.hasLoadedQuestion = true;
       },
       error: err => {
-        console.error('problem with loading the questions: ', err);
+        console.error(err);
         this.message = err.message;
       },
       complete: () => console.log('Completed fetch question')
@@ -73,7 +73,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.loadAnswersArray = true;
       },
       error: err => {
-        console.error('problem with loading the answers: ', err);
+        console.error(err);
         this.message = err.message;
       },
       complete: () => console.log('Completed fetch answers')

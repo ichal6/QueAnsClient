@@ -1,0 +1,7 @@
+<form>
+  <label for="email">Email:</label>
+  <input type="email" id="email" placeholder="Please provide email" name="email" [(ngModel)]="email">
+  <label for="password">Password</label>
+  <input type="password" id="password" placeholder="Please provide your password" name="password" [(ngModel)]="password">
+  <button type="button" (click)="onSubmit()">Log in</button>
+</form>
