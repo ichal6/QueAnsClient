@@ -19,7 +19,7 @@ export class LoginComponent {
     this.email = "";
     this.password = "";
     effect(() => {
-      if(this.authService.isAuthenticated()) {
+      if(this.authService.isAuthenticated) {
         this.route.navigate(['admin'])
       }
     });

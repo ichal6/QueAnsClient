@@ -8,27 +8,40 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthService {
-
-  isAuthenticated: WritableSignal<boolean>;
+  readonly _isAuthenticated: WritableSignal<boolean>;
 
   constructor(private route: Router,
               private http: HttpClient) {
-    this.isAuthenticated = signal(false);
+    this._isAuthenticated = signal(false);
     this.checkIfAlreadyAuthenticated();
   }
 
   authenticate(name: string, password: string): void {
     this.validateUser(name, password).subscribe({
       next: () => {
-      this.isAuthenticated.set(true);
+      this._isAuthenticated.set(true);
     },
     error: () => {
-      this.isAuthenticated.set(false);
+      this._isAuthenticated.set(false);
     }
     });
   }
 
-  checkIfAlreadyAuthenticated(): void {
+  logout(): void {
+    this.logoutUser().subscribe({
+      next: () => {
+        this._isAuthenticated.set(false);
+      },
+      error: (err) => console.dir({'problem with logout: ': err}),
+      complete: () => this.route.navigate(['/'])
+    });
+  }
+
+  get isAuthenticated(): boolean {
+    return this._isAuthenticated();
+  }
+
+  private checkIfAlreadyAuthenticated(): void {
     this.isLogin().pipe(
       catchError(err => {
         console.log(err);
@@ -36,21 +49,11 @@ export class AuthService {
       })
     ).subscribe({
       next:  () =>  {
-        this.isAuthenticated.set(true);
+        this._isAuthenticated.set(true);
       },
       error: () => {
-        this.isAuthenticated.set(false);
+        this._isAuthenticated.set(false);
       }
-    });
-  }
-
-  logout(): void {
-    this.logoutUser().subscribe({
-      next: () => {
-        this.isAuthenticated.set(false);
-      },
-      error: (err) => console.dir({'problem with logout: ': err}),
-      complete: () => this.route.navigate(['/'])
     });
   }
 

@@ -11,9 +11,9 @@ export class AuthRouteGuardService {
               private router: Router) { }
 
   canActivate(): boolean  {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.isAuthenticated) {
       this.router.navigate(['login']);
     }
-    return this.authService.isAuthenticated();
+    return this.authService.isAuthenticated;
   }
 }
