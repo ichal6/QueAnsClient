@@ -1,7 +1,16 @@
-<p>entry works</p>
 @defer (when hasLoaded){
-  @for (entry of entries; track entry.id) {
+  @for (entry of entries; track entry) {
     <p>{{ entry.id }}</p>
+    @if (entry.questions.length > 0) {
+      <p>{{ entry.questions[0] }}</p>
+    } @else {
+      <p class="warning">There is no questions for this entry!</p>
+    }
+    @if (entry.answers.length > 0) {
+      <p>{{ entry.answers[0] }}</p>
+    } @else {
+      <p class="warning">There is no answers for this entry!</p>
+    }
   }
 } @placeholder {
   <p>Waiting for data</p>

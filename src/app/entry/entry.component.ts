@@ -45,4 +45,5 @@ export class EntryComponent implements OnInit, OnDestroy{
     });
   }
 
+  protected readonly Entry = Entry;
 }
