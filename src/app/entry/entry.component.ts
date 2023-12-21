@@ -1,12 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal, Signal} from '@angular/core';
 import {EntryService} from "./service/entry.service";
 import {Subscription} from "rxjs";
 import {Entry} from "./model/entry";
+import {AuthService} from "../authentication/auth.service";
+import {NewEntryComponent} from "./new-entry/new-entry.component";
 
 @Component({
   selector: 'app-entry',
   standalone: true,
-  imports: [],
+  imports: [
+    NewEntryComponent
+  ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.css'
 })
@@ -15,23 +19,27 @@ export class EntryComponent implements OnInit, OnDestroy{
   entries: Array<Entry>;
   message: string;
   hasLoaded: boolean;
+  isAuthenticated: Signal<boolean>
 
-  constructor(private entryService: EntryService) {
+  constructor(private entryService: EntryService,
+              private authService: AuthService) {
     this.subscribeEntries = Subscription.EMPTY;
     this.entries = new Array<Entry>();
     this.message = "";
     this.hasLoaded = false;
+    this.isAuthenticated = signal(this.authService.isAuthenticated);
   }
 
   ngOnInit(): void {
     this.requestEntries();
+    this.isAuthenticated = signal(this.authService.isAuthenticated);
   }
 
   ngOnDestroy(): void {
     this.subscribeEntries?.unsubscribe();
   }
 
-  requestEntries(): void {
+  private requestEntries(): void {
     this.subscribeEntries = this.entryService.getEntries().subscribe({
       next: (res) => {
         this.entries = res;
@@ -44,6 +52,4 @@ export class EntryComponent implements OnInit, OnDestroy{
       complete: () => console.log('Completed fetch entries')
     });
   }
-
-  protected readonly Entry = Entry;
 }

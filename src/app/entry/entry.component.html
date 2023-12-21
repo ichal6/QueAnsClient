@@ -1,6 +1,9 @@
+@if(isAuthenticated()) {
+  <app-new-entry/>
+}
+
 @defer (when hasLoaded){
   @for (entry of entries; track entry) {
-    <p>{{ entry.id }}</p>
     @if (entry.questions.length > 0) {
       <p>{{ entry.questions[0] }}</p>
     } @else {
