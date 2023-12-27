@@ -65,7 +65,7 @@ export class AuthService {
     return this.http.get<void>(environment.restUrl + '/logoutUser', {withCredentials: true});
   }
 
-  private isLogin(): Observable<string> {
+  isLogin(): Observable<string> {
     return this.http.get(environment.restUrl + '/api/isLogin', {withCredentials: true, responseType: "text"});
   }
 }

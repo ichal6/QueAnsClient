@@ -19,4 +19,10 @@ export class EntryService {
         )
       );
   }
+
+  addEntry(): Observable<string> {
+    return this.http.post(environment.restUrl + '/api/entry', null,
+      {withCredentials: true, responseType: "text"}
+    );
+  }
 }

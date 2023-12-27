@@ -19,4 +19,26 @@ export class QuestionService {
         )
       );
   }
+
+  getQuestionsForEntry(entryId: string): Observable<Array<Question>> {
+    return this.http.get<Array<QuestionJS>>(environment.restUrl + '/api/entry/' + entryId + '/questions')
+      .pipe(
+        map(
+          questionJSArray => questionJSArray.map(questionJS => Question.fromHttp(questionJS, entryId))
+        )
+      );
+  }
+
+  addNewQuestion(entryId: string, newQuestion: string): Observable<Question> {
+    return this.http.post<QuestionJS>(
+      environment.restUrl + '/api/question/' + entryId,
+      {'question': newQuestion},
+      {withCredentials: true}
+    )
+      .pipe(
+        map(
+          questionJS => Question.fromHttp(questionJS, entryId)
+        )
+      );
+  }
 }

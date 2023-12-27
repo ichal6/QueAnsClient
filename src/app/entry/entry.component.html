@@ -1,7 +1,10 @@
-<p>entry works</p>
+@if(isAuthenticated()) {
+  <app-new-entry/>
+}
+
 @defer (when hasLoaded){
-  @for (entry of entries; track entry.id) {
-    <p>{{ entry.id }}</p>
+  @for (entry of entries; track entry) {
+    <app-single-entry [entry]="entry"/>
   }
 } @placeholder {
   <p>Waiting for data</p>

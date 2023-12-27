@@ -1,0 +1,9 @@
+<form>
+  <label for="question">Please provide question: </label>
+  <input placeholder="New Question" name="question" id="question" type="text" [(ngModel)]="newQuestion">
+  <button type="button" (click)="onSubmit()">Add question</button>
+</form>
+
+@if (message.length != 0) {
+  <p class="message"> {{message}} </p>
+}

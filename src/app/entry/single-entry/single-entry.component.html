@@ -1,0 +1,17 @@
+@if (isAdmin) {
+  <button type="button" (click)="edit()">Edit</button>
+}
+@if (entry.questions.length > 0) {
+  @for (question of entry.questions; track question) {
+    <p>{{ question }}</p>
+  }
+} @else {
+  <p class="warning">There is no questions for this entry!</p>
+}
+@if (entry.answers.length > 0) {
+  @for (answer of entry.answers; track answer) {
+    <p>{{ answer }}</p>
+  }
+} @else {
+  <p class="warning">There is no answers for this entry!</p>
+}

@@ -19,4 +19,16 @@ export class AnswerService {
         )
       );
   }
+
+  addAnswer(entryId: string, answer: string): Observable<Answer> {
+    return this.http.post<AnswerJS>(
+      environment.restUrl + '/api/answer/' + entryId,
+      {"answer": answer},
+      {withCredentials: true})
+      .pipe(
+        map(
+          answerJS => Answer.fromHttp(answerJS)
+        )
+      )
+  }
 }
