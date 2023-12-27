@@ -4,12 +4,16 @@ import {Subscription} from "rxjs";
 import {Entry} from "./model/entry";
 import {AuthService} from "../authentication/auth.service";
 import {NewEntryComponent} from "./new-entry/new-entry.component";
+import {RouterOutlet} from "@angular/router";
+import {SingleEntryComponent} from "./single-entry/single-entry.component";
 
 @Component({
   selector: 'app-entry',
   standalone: true,
   imports: [
-    NewEntryComponent
+    NewEntryComponent,
+    RouterOutlet,
+    SingleEntryComponent
   ],
   templateUrl: './entry.component.html',
   styleUrl: './entry.component.css'

@@ -6,11 +6,14 @@ export class Question {
               private _entryId: string) {
   }
 
-  static fromHttp(questionJS: QuestionJS) {
+  static fromHttp(questionJS: QuestionJS, entryId?: string) {
     const baseURL: string = environment.restUrl + "/api/entry/";
-    const cleanedURL: string = questionJS._links.entry.href.replace(new RegExp('^' + baseURL), '');
+    if(entryId) {
+      return new Question(questionJS.id, questionJS.question, entryId);
+    }
+    const entryIdFromLink: string = questionJS._links.entry.href.replace(new RegExp('^' + baseURL), '');
 
-    return new Question(questionJS.id, questionJS.question, cleanedURL);
+    return new Question(questionJS.id, questionJS.question, entryIdFromLink);
   }
 
   get id(): string {

@@ -4,16 +4,7 @@
 
 @defer (when hasLoaded){
   @for (entry of entries; track entry) {
-    @if (entry.questions.length > 0) {
-      <p>{{ entry.questions[0] }}</p>
-    } @else {
-      <p class="warning">There is no questions for this entry!</p>
-    }
-    @if (entry.answers.length > 0) {
-      <p>{{ entry.answers[0] }}</p>
-    } @else {
-      <p class="warning">There is no answers for this entry!</p>
-    }
+    <app-single-entry [entry]="entry"/>
   }
 } @placeholder {
   <p>Waiting for data</p>
