@@ -1,17 +1,23 @@
-<div id="menu-box">
-  <ul id="main-menu">
-    <li class="menu-item">
-      <a (click)="navigateTo('')" (keyup.enter)="navigateTo('')" tabindex="0">Random question</a>
-    </li>
-    <li class="menu-item">
-      <a (click)="navigateTo('entry')" (keyup.enter)="navigateTo('entry')" tabindex="0">All entries</a>
-    </li>
-    <li class="menu-item">
-      <a (click)="navigateTo('admin')" (keyup.enter)="navigateTo('admin')" tabindex="0">Admin</a>
-    </li>
-    <li class="menu-item">
-      <a (click)="navigateTo('login')" (keyup.enter)="navigateTo('login')" tabindex="0">login</a>
-    </li>
-  </ul>
-</div>
+<mat-toolbar>
+  <a mat-fab extended color="primary" id="title">
+    Q&A app
+    <mat-icon>home</mat-icon>
+  </a>
+  <div id="menu-box">
+    <ul id="main-menu">
+      <li class="menu-item">
+        <a mat-menu-item (click)="navigateTo('')" (keyup.enter)="navigateTo('')" tabindex="0">Random question</a>
+      </li>
+      <li class="menu-item">
+        <a (click)="navigateTo('entry')" (keyup.enter)="navigateTo('entry')" tabindex="0">All entries</a>
+      </li>
+      <li class="menu-item">
+        <a (click)="navigateTo('admin')" (keyup.enter)="navigateTo('admin')" tabindex="0">Admin</a>
+      </li>
+      <li class="menu-item">
+        <a (click)="navigateTo('login')" (keyup.enter)="navigateTo('login')" tabindex="0">login</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
 
