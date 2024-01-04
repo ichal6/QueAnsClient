@@ -1,0 +1,21 @@
+#menu-box {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+#main-menu {
+  padding: 0;
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu-item {
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.menu-item:hover {
+  color: #ff312c;
+}
